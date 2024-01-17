@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <style type="text/css">
+*{
+  margin: 0;
+
+}
+body{
+  width: 100%;
+  height: 100vh;
+  background: orange;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+form{
+  width: 190px;
+  height: auto;
+  padding: 40px;
+  border-radius: 10px;
+  background: #a297ba;
+}
+
+
+/* Define a keyframe animation for the background */
+@keyframes bg-animation {
+  0% {
+    background-color: #010e15; /* red */
+  }
+  25% {
+    background-color: #bae3eb; /* yellow */
+  }
+  50% {
+    background-color: #494144; /* green */
+  }
+  75% {
+    background-color: #31925b; /* cyan */
+  }
+  100% {
+    background-color: #eb5f90; /* red */
+  }
+}
+
+/* Apply the animation to the body element */
+body {
+  animation: bg-animation 10s infinite; /* repeat the animation every 10 seconds */
+}
+.head{
+  color: blue;
+  text-align: center;
+}
+
+
+    </style>
+</head>
+<body>
+    
+    <form  autocomplete="off" method="post" name="submit-to-google-sheet">
+      <h1 class="head">Login In</h1><br>
+      <label > Name</label><br>
+      <input type="text" name="name"><br><br>
+      <label>Email</label><br>
+      <input type="email" name="email"><br><br>
+      <label >Gender</label><br>
+      <input type="radio" name="gender" value="Male"><label>Male</label>
+      <input type="radio" name="gender" value="Female"><label>Female</label><br>
+      <label>Message</label><br>
+      <textarea name ="message" cols="10">
+
+      </textarea><br><br>
+<input type="submit" name="submit"><br>
+
+
+
+<span id="Success"></span>
+
+
+
+
+
+    </form>    
+      
+      <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbyMnJ9x5a1iZS4aWgkrJpX1fy0zl2DJu0IhU2r90wO2knMFn_NTKu70NiIkNcBnz1RUhg/exec'
+        const form = document.forms['submit-to-google-sheet']
+      const Success = document.getElementById('Success');
+        form.addEventListener('submit', e => {
+          e.preventDefault()
+          fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+            .then(response => {
+              Success.innerHTML="Data successfully submit.";
+
+            })
+            .catch(error => console.error('Error!', error.message))
+        })
+      </script>
+
+</body>
+
+</html>
+
+
